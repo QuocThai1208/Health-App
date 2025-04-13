@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-p9dh(g*be7wk0_j%_5kgz6p9af@$-#q%p+5k&#(tuqf$$t^j*i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'health.apps.HealthConfig',
-    'oauth2_provider'
+    'oauth2_provider',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -54,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'healthapp.urls'
@@ -65,7 +67,6 @@ REST_FRAMEWORK = {'DEFAULT_AUTHENTICATION_CLASSES': (
     'rest_framework.authentication.TokenAuthentication',
     'rest_framework.authentication.SessionAuthentication',
 )}
-
 
 TEMPLATES = [
     {
@@ -153,12 +154,15 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+ALLOWED_HOSTS = ['ThaiPham.pythonanywhere.com']
+CORS_ALLOW_ALL_ORIGINS = True
 
 CLIENT_ID = 'XvhXQC8hLlt6SeWC1OIqMYpYvC7Z3g1yoJOgIIY5'
 CLIENT_SECRET = '0xPp0M7s839Su2XX490lnEbJ29osBlEdShxe0jaJNCgR7OeBqMntPlGQhoSfWuTVAw0SaGdzsnnzEyPZAmza5JsGVbCmQJoYcSHCZ8upKOpALST7cYYdSY6ADOQ2UDVp'
 
 import os
 from dotenv import load_dotenv
+
 load_dotenv(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".env"))
 
 GOOGLE_FIT_CLIENT_ID = os.getenv("GOOGLE_FIT_CLIENT_ID")
@@ -166,4 +170,4 @@ GOOGLE_FIT_CLIENT_SECRET = os.getenv("GOOGLE_FIT_CLIENT_SECRET")
 GOOGLE_FIT_REDIRECT_URI = "http://127.0.0.1:8000/callback/google-fit"
 GOOGLE_FIT_SCOPE = "https://www.googleapis.com/auth/fitness.activity.read https://www.googleapis.com/auth/fitness.heart_rate.read https://www.googleapis.com/auth/fitness.nutrition.read"
 
-#1.54.40.152
+# 1.54.40.152

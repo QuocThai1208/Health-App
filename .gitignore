@@ -1,7 +1,6 @@
 # Bỏ qua file secrets
 *.env
 .env
-requirement.txt
 
 # Bỏ thư mục môi trường ảo
 venv/
