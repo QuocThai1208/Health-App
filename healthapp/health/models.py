@@ -4,7 +4,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from ckeditor.fields import RichTextField
 from cloudinary.models import CloudinaryField
-from django.db.models import ForeignKey
 
 
 class BaseModel(models.Model):
@@ -228,4 +227,12 @@ class HealthDiary(BaseModel):
     calo_burned = models.IntegerField(default=0)
     calo_intake = models.IntegerField(default=0)
     ingredient = models.ManyToManyField('Ingredient', null=True, blank=True)
-    weight = models.FloatField(default=0)
+    weight = models.FloatField(default=0, blank=True)
+    height = models.FloatField(default=0, blank=True)
+    bmi = models.FloatField(default=0, blank=True)
+
+    def save(self, *args, **kwargs):
+        if self.height:
+            self.bmi = round(self.weight / ((self.height / 100) ** 2), 2)
+        super().save(*args, **kwargs)
+

@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-p9dh(g*be7wk0_j%_5kgz6p9af@$-#q%p+5k&#(tuqf$$t^j*i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -43,8 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'health.apps.HealthConfig',
-    'oauth2_provider',
-    'corsheaders'
+    'oauth2_provider'
 ]
 
 MIDDLEWARE = [
@@ -54,8 +53,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware'
 ]
 
 ROOT_URLCONF = 'healthapp.urls'
@@ -85,7 +83,6 @@ TEMPLATES = [
 ]
 
 import pymysql
-
 pymysql.install_as_MySQLdb()
 
 import cloudinary
@@ -154,7 +151,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-ALLOWED_HOSTS = ['ThaiPham.pythonanywhere.com']
 CORS_ALLOW_ALL_ORIGINS = True
 
 CLIENT_ID = 'XvhXQC8hLlt6SeWC1OIqMYpYvC7Z3g1yoJOgIIY5'

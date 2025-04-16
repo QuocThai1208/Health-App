@@ -22,7 +22,6 @@ def get_google_fit_water_intake(access_token):
 
     response = requests.post(url, headers=headers, json=body)
     data = response.json()
-
     water = [v["fpVal"] for v in data["bucket"][0]["dataset"][0]["point"][0]["value"] if "fpVal" in v]
     return water
 
@@ -42,7 +41,6 @@ def get_google_fit_heart_rate(access_token):
 
     response = requests.post(url, headers=headers, json=body)
     data = response.json()
-
     heart_rate = [[v["fpVal"] for v in data["bucket"][0]["dataset"][0]["point"][0]["value"] if "fpVal" in v]]
     return heart_rate
 

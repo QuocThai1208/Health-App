@@ -85,7 +85,7 @@ class NutrientsAdmin(admin.ModelAdmin):
 
 
 class HealthDiaryAdmin(admin.ModelAdmin):
-    list_display = ['user', 'calo_burned', 'calo_intake', 'weight']
+    list_display = ['user', 'calo_burned', 'calo_intake', 'weight', 'height', 'bmi']
 
 
 class HealthAppAdminSite(admin.AdminSite):

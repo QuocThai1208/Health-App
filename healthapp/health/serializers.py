@@ -33,7 +33,7 @@ class TagSerializer(serializers.ModelSerializer):
 class GroupScheduleSerializer(serializers.ModelSerializer):
     class Meta:
         model = GroupSchedule
-        fields = ['name']
+        fields = ['id', 'name']
 
 
 class ScheduleSerializer(serializers.ModelSerializer):
@@ -210,4 +210,4 @@ class ReminderSerializer(serializers.ModelSerializer):
 class HealthDiarySerializer(serializers.ModelSerializer):
     class Meta:
         model = HealthDiary
-        fields =['calo_burned', 'ingredient', 'calo_intake', 'weight']
+        fields =['calo_burned', 'ingredient', 'calo_intake', 'weight', 'height']
