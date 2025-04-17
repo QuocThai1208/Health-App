@@ -1,7 +1,6 @@
 from .models import User, HealthInformation, HealthGoal, Schedule, Tag, GroupSchedule, Exercise, Session, ActualResult, \
     PredictedResult, ResultOfSession, Instruct, UserSchedule, Diet, Menu, EatingMethod, MenuOfDay, Ingredient, \
     Nutrients, Dish, Meal, Reminder, HealthDiary
-
 from rest_framework import serializers
 
 
@@ -21,13 +20,13 @@ class HealthInfoSerializer(serializers.ModelSerializer):
         return data
     class Meta:
         model = HealthInformation
-        fields = ['height', 'weight', 'age', 'health_goal']
+        fields = ['id, ''height', 'weight', 'age', 'health_goal']
 
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
-        fields = ['name']
+        fields = ['id', 'name']
 
 
 class GroupScheduleSerializer(serializers.ModelSerializer):
@@ -63,7 +62,7 @@ class ExerciseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Exercise
-        fields = ['name', 'image']
+        fields = ['id', 'name', 'image']
 
 
 class ExerciseDetailSerializer(ExerciseSerializer):
@@ -82,25 +81,25 @@ class SessionDetailSerializer(SessionSerializer):
 class ResultOfSessionSerializer(serializers.ModelSerializer):
     class Meta:
         model = ResultOfSession
-        fields = ['session', 'user', 'practice_time', 'calo']
+        fields = ['id', 'session', 'user', 'practice_time', 'calo']
 
 
 class ActualResultSerializer(serializers.ModelSerializer):
     class Meta:
         model = ActualResult
-        fields = ['exercise', 'schedule', 'set', 'rep', 'weight']
+        fields = ['id', 'exercise', 'schedule', 'set', 'rep', 'weight']
 
 
 class PredictedResultSerializer(serializers.ModelSerializer):
     class Meta:
         model = PredictedResult
-        fields = ['exercise', 'session', 'user', 'set', 'rep', 'weight']
+        fields = ['id', 'exercise', 'session', 'user', 'set', 'rep', 'weight']
 
 
 class InstructSerializer(serializers.ModelSerializer):
     class Meta:
         model = Instruct
-        fields = ['exercise', 'name', 'describe']
+        fields = ['id', 'exercise', 'name', 'describe']
 
 
 class UserScheduleSerializer(serializers.ModelSerializer):
@@ -111,31 +110,31 @@ class UserScheduleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserSchedule
-        fields = ['user', 'schedule', 'flag']
+        fields = ['id', 'user', 'schedule', 'flag']
 
 
 class DietSerializer(serializers.ModelSerializer):
     class Meta:
         model = Diet
-        fields = ['name', 'describe', 'image']
+        fields = ['id', 'name', 'describe', 'image']
 
 
 class MenuSerializer(serializers.ModelSerializer):
     class Meta:
         model = Menu
-        fields = ['diet', 'name', 'total_day']
+        fields = ['id', 'diet', 'name', 'total_day']
 
 
 class MenuOfDaySerializer(serializers.ModelSerializer):
     class Meta:
         model = MenuOfDay
-        fields = ['name']
+        fields = ['id', 'name']
 
 
 class IngredientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ingredient
-        fields = ['name']
+        fields = ['id', 'name']
 
 
 class IngredientDetailSerializer(IngredientSerializer):
@@ -155,7 +154,7 @@ class NutrientsSerializer(serializers.ModelSerializer):
     ingredient = IngredientSerializer()
     class Meta:
         model = Nutrients
-        fields = ['ingredient', 'unit', 'kcal', 'fat', 'protein', 'starch']
+        fields = ['id', 'ingredient', 'unit', 'kcal', 'fat', 'protein', 'starch']
 
 
 class EatingMethodSerializer(serializers.ModelSerializer):
@@ -167,14 +166,14 @@ class EatingMethodSerializer(serializers.ModelSerializer):
 class DishSerializer(serializers.ModelSerializer):
     class Meta:
         model = Dish
-        fields = ['name']
+        fields = ['id', 'name']
 
 
 class MealSerializer(serializers.ModelSerializer):
     suggest_dish = DishSerializer(many=True)
     class Meta:
         model = Meal
-        fields = ['name', 'suggest_dish']
+        fields = ['id', 'name', 'suggest_dish']
 
 
 class UserSerializer(serializers.ModelSerializer):

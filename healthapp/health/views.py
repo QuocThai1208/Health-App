@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from rest_framework import viewsets, generics, status
-from . import serializers, perms
+from . import serializers, perms, paginators
 from rest_framework.decorators import action
 from .models import Schedule, GroupSchedule, Session, ActualResult, Diet, Menu, MenuOfDay, Ingredient, Reminder, HealthInformation
 
@@ -19,6 +19,7 @@ class HealthInfoViewSet(viewsets.ViewSet, generics.ListAPIView, generics.CreateA
 class GroupScheduleSViewSet(viewsets.ViewSet, generics.ListAPIView):
     queryset = GroupSchedule.objects.filter(active=True)
     serializer_class = serializers.GroupScheduleSerializer
+    pagination_class = paginators.ItemPaginator
 
     @action(methods=['get'], url_path='schedule', detail=True)
     def get_schedule(self, request, pk):
@@ -29,6 +30,7 @@ class GroupScheduleSViewSet(viewsets.ViewSet, generics.ListAPIView):
 class ScheduleViewSet(viewsets.ViewSet, generics.RetrieveAPIView):
     queryset = Schedule.objects.prefetch_related('Tags').filter(active=True)
     serializer_class = serializers.ScheduleDetailSerializer
+    pagination_class = paginators.ItemPaginator
 
     @action(methods=['get'], detail=True, url_path='session')
     def get_session(self, request, pk):
@@ -54,6 +56,7 @@ class ActualResultViewSet(viewsets.ViewSet, generics.ListAPIView):
 class DietViewSet(viewsets.ViewSet, generics.ListAPIView):
     queryset = Diet.objects.filter(active=True)
     serializer_class = serializers.DietSerializer
+    pagination_class = paginators.ItemPaginator
 
     @action(methods=['get'], url_path='menu', detail=True)
     def get_menu(self, request, pk):
@@ -69,6 +72,7 @@ class DietViewSet(viewsets.ViewSet, generics.ListAPIView):
 class MenuViewSet(viewsets.ViewSet, generics.ListAPIView):
     queryset = Menu.objects.filter(active=True)
     serializer_class = serializers.MenuSerializer
+    pagination_class = paginators.ItemPaginator
 
     @action(methods=['get'], url_path='menu-of-day', detail=True)
     def get_menu_of_day(self, request, pk):
@@ -89,6 +93,7 @@ class MenuOfDayViewSet(viewsets.ViewSet, generics.RetrieveAPIView):
 class IngredientViewSet(viewsets.ViewSet, generics.RetrieveAPIView):
     queryset = Ingredient.objects.filter(active=True)
     serializer_class = serializers.IngredientDetailSerializer
+    pagination_class = paginators.ItemPaginator
 
     @action(methods=['get'], detail=True, url_path='nutrients')
     def get_nutrients(self, request, pk):
@@ -99,6 +104,7 @@ class IngredientViewSet(viewsets.ViewSet, generics.RetrieveAPIView):
 class ReminderViewSet(viewsets.ViewSet, generics.ListAPIView, generics.CreateAPIView , generics.DestroyAPIView, generics.UpdateAPIView):
     serializer_class = serializers.ReminderSerializer
     permission_classes = [perms.IsReminderOwner]
+    pagination_class = paginators.ItemPaginator
 
     def get_queryset(self):
         return Reminder.objects.filter(user=self.request.user,active=True)

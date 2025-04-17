@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from rest_framework import viewsets, generics, status
-from . import serializers
+from . import serializers, paginators
 from rest_framework.decorators import action
 from .models import  Exercise
 
@@ -8,6 +8,7 @@ from .models import  Exercise
 class ExerciseViewSet(viewsets.ViewSet, generics.ListAPIView):
     queryset = Exercise.objects.prefetch_related('tag').filter(active=True)
     serializer_class = serializers.ExerciseDetailSerializer
+    pagination_class = paginators.ItemPaginator
 
     @action(methods=['get'], url_path='actual-result', detail=True)
     def get_actual_result(self, request, pk):
