@@ -30,9 +30,14 @@ class TagSerializer(serializers.ModelSerializer):
 
 
 class GroupScheduleSerializer(serializers.ModelSerializer):
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['image'] = instance.image.url if instance.image else ''
+        return data
+
     class Meta:
         model = GroupSchedule
-        fields = ['id', 'name']
+        fields = ['id', 'name', 'image']
 
 
 class ScheduleSerializer(serializers.ModelSerializer):

@@ -72,6 +72,7 @@ class Tag(BaseModel):
 
 class GroupSchedule(BaseModel):
     name = models.CharField(max_length=50)
+    image = CloudinaryField(null=True, blank=True)
 
     def __str__(self):
         return self.name
