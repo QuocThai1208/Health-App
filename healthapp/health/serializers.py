@@ -20,7 +20,7 @@ class HealthInfoSerializer(serializers.ModelSerializer):
         return data
     class Meta:
         model = HealthInformation
-        fields = ['id, ''height', 'weight', 'age', 'health_goal']
+        fields = ['id', 'height', 'weight', 'age', 'health_goal']
 
 
 class TagSerializer(serializers.ModelSerializer):

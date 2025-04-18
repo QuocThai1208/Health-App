@@ -19,11 +19,14 @@ class HealthInfoViewSet(viewsets.ViewSet, generics.ListAPIView, generics.CreateA
 class GroupScheduleSViewSet(viewsets.ViewSet, generics.ListAPIView):
     queryset = GroupSchedule.objects.filter(active=True)
     serializer_class = serializers.GroupScheduleSerializer
-    pagination_class = paginators.ItemPaginator
 
-    @action(methods=['get'], url_path='schedule', detail=True)
+    @action(methods=['get'], url_path='schedules', detail=True)
     def get_schedule(self, request, pk):
-        schedules = self.get_object().schedule_set.filter(active=True)
+        tag_ids = self.request.query_params.get('tag_ids')
+        if tag_ids:
+            schedules = self.get_object().schedule_set.filter(active=True, Tags__in=tag_ids)
+        else:
+            schedules = self.get_object().schedule_set.filter(active=True)
         return Response(serializers.ScheduleSerializer(schedules, many=True).data, status=status.HTTP_200_OK)
 
 
