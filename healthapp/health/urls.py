@@ -19,6 +19,7 @@ router.register('stats', view_stats.StatsViewSet, basename='stats')
 router.register('reminders', views.ReminderViewSet, basename='reminder')
 router.register('health-diarys', view_health_diary.HealthDiaryViewSet, basename='health-diary')
 router.register('health-info', views.HealthInfoViewSet, basename='health-info')
+router.register('tags', views.TagViewSet, basename='tag')
 
 urlpatterns = [
     path('', include(router.urls)),

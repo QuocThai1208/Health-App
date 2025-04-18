@@ -2,7 +2,7 @@ from rest_framework.response import Response
 from rest_framework import viewsets, generics, status
 from . import serializers, perms, paginators
 from rest_framework.decorators import action
-from .models import Schedule, GroupSchedule, Session, ActualResult, Diet, Menu, MenuOfDay, Ingredient, Reminder, HealthInformation
+from .models import Tag, Schedule, GroupSchedule, Session, ActualResult, Diet, Menu, MenuOfDay, Ingredient, Reminder, HealthInformation
 
 
 class HealthInfoViewSet(viewsets.ViewSet, generics.ListAPIView, generics.CreateAPIView, generics.UpdateAPIView):
@@ -28,6 +28,11 @@ class GroupScheduleSViewSet(viewsets.ViewSet, generics.ListAPIView):
         else:
             schedules = self.get_object().schedule_set.filter(active=True)
         return Response(serializers.ScheduleSerializer(schedules, many=True).data, status=status.HTTP_200_OK)
+
+
+class TagViewSet(viewsets.ViewSet, generics.ListAPIView):
+    queryset = Tag.objects.filter(active=True)
+    serializer_class = serializers.TagSerializer
 
 
 class ScheduleViewSet(viewsets.ViewSet, generics.RetrieveAPIView):
