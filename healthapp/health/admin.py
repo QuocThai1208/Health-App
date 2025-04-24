@@ -3,15 +3,20 @@ from django.contrib import admin
 from .models import  User, HealthInformation, HealthGoal, GroupSchedule, Schedule, Session, \
     Tag, Exercise, ResultOfSession, ActualResult, PredictedResult, Instruct, UserSchedule, Diet, Menu, EatingMethod, \
     MenuOfDay, Meal, Nutrients, Ingredient, Dish, Reminder, HealthDiary
-from ckeditor_uploader.widgets import CKEditorUploadingWidget
-from django.template.response import TemplateResponse
-from django.utils.html import mark_safe
-from django.urls import path
 from django import forms
+from django.utils import timezone
+from django.db import models
+
 
 
 class MyUserAdmin(admin.ModelAdmin):
     list_display = ['username', 'user_role', 'menu']
+
+    formfield_overrides = {
+        models.IntegerField: {
+            'widget': forms.Select(choices=[(y, y) for y in range(1900, timezone.now().year + 1)])
+        }
+    }
 
 
 class MyHealthInfoAdmin(admin.ModelAdmin):

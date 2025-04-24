@@ -35,6 +35,7 @@ class User(AbstractUser):
     avatar = CloudinaryField(null=True, blank=True)
     messages = models.ManyToManyField('Message', blank=True)
     menu = models.ForeignKey('Menu', null=True, blank=True, on_delete=models.SET_NULL)
+    birth = models.IntegerField(null=True)
     user_role = models.IntegerField(
         choices = UserRole.choices,
         default = UserRole.CUSTOMER

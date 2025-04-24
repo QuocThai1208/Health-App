@@ -1,3 +1,5 @@
+
+
 from .models import User, HealthInformation, HealthGoal, Schedule, Tag, GroupSchedule, Exercise, Session, ActualResult, \
     PredictedResult, ResultOfSession, Instruct, UserSchedule, Diet, Menu, EatingMethod, MenuOfDay, Ingredient, \
     Nutrients, Dish, Meal, Reminder, HealthDiary
@@ -115,7 +117,8 @@ class UserScheduleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserSchedule
-        fields = ['id', 'user', 'schedule', 'flag']
+        fields = ['id', 'user', 'schedule', 'flag', 'birth']
+
 
 
 class DietSerializer(serializers.ModelSerializer):
