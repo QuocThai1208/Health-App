@@ -28,7 +28,7 @@ class HealthInfoSerializer(serializers.ModelSerializer):
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
-        fields = ['id', 'name']
+        fields = ['id', 'name', 'image']
 
 
 class GroupScheduleSerializer(serializers.ModelSerializer):
@@ -117,7 +117,7 @@ class UserScheduleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserSchedule
-        fields = ['id', 'user', 'schedule', 'flag', 'birth']
+        fields = ['id', 'user', 'schedule', 'flag']
 
 
 
@@ -200,7 +200,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'address', 'password', 'avatar', 'user_role', 'menu']
+        fields = ['first_name', 'last_name', 'username', 'address', 'birth', 'password', 'avatar', 'user_role', 'menu']
         extra_kwargs = {
             'password':{
                 'write_only':True
